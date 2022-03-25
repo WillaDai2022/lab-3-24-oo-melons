@@ -1,6 +1,7 @@
 """Classes for melon orders."""
 
 from re import A
+from random import randint
 
 
 class AbstractMelonOrder:
@@ -13,11 +14,14 @@ class AbstractMelonOrder:
         self.order_type = order_type
         self.tax = tax
         self.shipped = False
+    
+    def get_base_price(self):
+        self.base_price = randint(5,9)
         
     def get_total(self):
         """Calculate price, including tax."""
 
-        base_price = 5
+        self.base_price = self.get_base_price()
         if self.species == "Christmas melon":
             base_price *= 1.5
         total = (1 + self.tax) * self.qty * base_price
